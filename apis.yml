@@ -1,8 +1,29 @@
 aid: sesame-labs
+accessModel:
+  pricing: unknown
+  onboarding: open
+  trial: false
+  try_now: false
+  public: true
+  label: Open access
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/sesame-labs.png
 name: Sesame Labs
-description: Sesame Labs is a company surfaced as a portfolio company of wing-venture-capital and added
-  to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment
-  pipeline.
+description: >-
+  Sesame Labs is the San Francisco company behind Notch (usenotch.ai), an
+  AI-powered advertising platform that generates finished, ready-to-run video
+  and image ads from a plain-language brief — script, AI avatar, voiceover,
+  b-roll footage, captions, and the full edit — rather than isolated clips.
+  Notch is distributed to agents primarily as a hosted, remote Model Context
+  Protocol (MCP) connector at app.usenotch.ai/mcp: any MCP-capable client
+  (Claude, Claude Code, ChatGPT) connects over streamable HTTP with browser-based
+  OAuth 2.0 sign-in and no API keys, then briefs Notch like a teammate to produce
+  ads that land in the user's workspace. Sesame Labs is a portfolio company of
+  Wing Venture Capital.
 url: https://raw.githubusercontent.com/api-evangelist/sesame-labs/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -12,10 +33,30 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
 tags:
 - Company
-apis: []
+- Artificial Intelligence
+- Advertising
+- Video
+- Marketing
+- Generative AI
+- MCP
+- Agents
+apis:
+- name: Notch MCP Server
+  description: >-
+    Hosted, remote Model Context Protocol server that lets an AI assistant create
+    finished video and image ads from a plain-language brief. Streamable HTTP
+    transport with browser-based OAuth 2.0 (PKCE + dynamic client registration);
+    no API keys. Ads spend the same monthly credits as the Notch web app.
+  humanURL: https://app.usenotch.ai/mcp/setup
+  baseURL: https://app.usenotch.ai/mcp
+  properties:
+  - type: MCPServer
+    url: mcp/sesame-labs-mcp.yml
+  - type: Authentication
+    url: authentication/sesame-labs-authentication.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -23,4 +64,35 @@ maintainers:
   email: info@apis.io
 common:
 - type: Website
-  url: https://usenotch.ai/?utm_source=wing&utm_medium=portfolio&utm_campaign=wing_directory
+  url: https://www.usenotch.ai
+- type: Documentation
+  url: https://app.usenotch.ai/mcp/setup
+- type: GettingStarted
+  url: https://app.usenotch.ai/mcp/setup
+- type: Pricing
+  url: https://app.usenotch.ai/pricing
+- type: SignUp
+  url: https://app.usenotch.ai/login
+- type: TermsOfService
+  url: https://www.usenotch.ai/terms-of-service
+- type: PrivacyPolicy
+  url: https://www.usenotch.ai/privacy-policy
+- type: Support
+  url: https://discord.gg/7ekcRhWFYa
+- type: MCPServer
+  url: mcp/sesame-labs-mcp.yml
+- type: LLMsTxt
+  url: llms/sesame-labs-llms.txt
+- type: WellKnown
+  url: well-known/sesame-labs-well-known.yml
+- type: Authentication
+  url: authentication/sesame-labs-authentication.yml
+- type: Conformance
+  url: conformance/sesame-labs-conformance.yml
+- type: DomainSecurity
+  url: security/sesame-labs-domain-security.yml
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 6
+  pass: local-v1

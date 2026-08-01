@@ -1,0 +1,28 @@
+generated: '2026-07-21'
+method: searched
+source: https://app.usenotch.ai/.well-known/oauth-authorization-server + mcp server-card
+standards:
+- id: oauth2
+  conforms: true
+  evidence: OAuth 2.0 authorization server metadata published; authorization_code + refresh_token grants
+- id: rfc8414-oauth-authorization-server-metadata
+  conforms: true
+  evidence: /.well-known/oauth-authorization-server returns 200 with issuer + endpoints
+- id: rfc9728-oauth-protected-resource-metadata
+  conforms: true
+  evidence: /.well-known/oauth-protected-resource and .../mcp return 200 with resource + authorization_servers
+- id: rfc7636-pkce
+  conforms: true
+  evidence: code_challenge_methods_supported = [S256]
+- id: rfc7591-dynamic-client-registration
+  conforms: true
+  evidence: registration_endpoint published; token_endpoint_auth_methods = none (public client)
+- id: mcp-model-context-protocol
+  conforms: true
+  evidence: streamable-http MCP server with published server card at /.well-known/mcp/server-card.json
+- id: oidc
+  conforms: false
+  evidence: /.well-known/openid-configuration returns 404 (OAuth 2.0 only, not OIDC)
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: no public REST OpenAPI to assert error format against

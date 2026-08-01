@@ -1,0 +1,24 @@
+# Notch
+
+> Notch creates finished video and image ads from a plain-language brief. Connect it to your AI assistant over MCP and brief it like a teammate — avatars, voiceover, footage, captions, the full edit.
+
+## MCP connector
+
+- Endpoint: https://app.usenotch.ai/mcp (streamable HTTP)
+- Auth: OAuth 2.0 in the browser — no API keys
+- Claude (one click, prefilled): https://claude.ai/customize/connectors?modal=add-custom-connector&connectorName=Notch&connectorUrl=https%3A%2F%2Fapp.usenotch.ai%2Fmcp
+- Claude (manual): Settings → Connectors → Add custom connector → paste the URL
+- Claude Code / MCP-capable CLIs: `claude mcp add --transport http notch https://app.usenotch.ai/mcp`
+- ChatGPT: Settings → Connectors → Advanced → Developer mode → Create → paste the URL
+- Server card: https://app.usenotch.ai/.well-known/mcp/server-card.json
+- OAuth resource metadata: https://app.usenotch.ai/.well-known/oauth-protected-resource/mcp
+
+Any client that supports remote MCP connectors can use the same endpoint URL.
+Ads created over MCP land in the user's Notch workspace and spend the same
+monthly credits as ads created on the web.
+
+## Pages
+
+- [MCP setup guide](https://app.usenotch.ai/mcp/setup): connect any client, FAQs
+- [Pricing](https://app.usenotch.ai/pricing): plans and credits
+- [Marketing site](https://www.usenotch.ai): product overview and features
