@@ -33,7 +33,7 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-21'
+modified: '2026-08-13'
 tags:
 - Company
 - Artificial Intelligence
@@ -79,6 +79,8 @@ common:
   url: https://www.usenotch.ai/privacy-policy
 - type: Support
   url: https://discord.gg/7ekcRhWFYa
+- type: Blog
+  url: https://www.usenotch.ai/blog
 - type: MCPServer
   url: mcp/sesame-labs-mcp.yml
 - type: LLMsTxt
@@ -91,8 +93,18 @@ common:
   url: conformance/sesame-labs-conformance.yml
 - type: DomainSecurity
   url: security/sesame-labs-domain-security.yml
+- type: Plans
+  url: plans/sesame-labs-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/sesame-labs-rate-limits.yml
+- type: Conventions
+  url: conventions/sesame-labs-conventions.yml
+- type: ErrorCatalog
+  url: errors/sesame-labs-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/sesame-labs-lifecycle.yml
 x-enrichment:
-  date: '2026-07-21'
+  date: '2026-08-13'
   status: enriched
   artifacts_added: 6
   pass: local-v1
