@@ -1,0 +1,74 @@
+generated: '2026-08-13'
+method: derived
+source: >-
+  probed https://app.usenotch.ai/mcp + well-known/sesame-labs-mcp-server-card.json +
+  well-known/sesame-labs-oauth-authorization-server.json + https://app.usenotch.ai/mcp/setup
+scope: >-
+  Notch has no public REST API. Its only programmatic surface is the hosted MCP
+  server, so these conventions describe the MCP transport contract rather than an
+  HTTP resource API. Everything below was read from the provider's discovery
+  documents or observed on an anonymous probe; nothing is inferred from an OpenAPI
+  (there is none).
+authentication:
+  style: oauth2-bearer
+  detail: >-
+    OAuth 2.0 authorization code + PKCE (S256), public client (token_endpoint_auth_methods
+    = none), RFC 7591 dynamic client registration. Bearer token in the Authorization
+    header (bearer_methods_supported = ["header"]). No API keys exist.
+  challenge_header: 'WWW-Authenticate: Bearer resource_metadata="https://app.usenotch.ai/.well-known/oauth-protected-resource/mcp"'
+  see: authentication/sesame-labs-authentication.yml
+transport:
+  protocol: MCP (Model Context Protocol)
+  binding: streamable-http
+  endpoint: https://app.usenotch.ai/mcp
+  methods_allowed: [GET, POST, DELETE, OPTIONS]
+  session_header: mcp-session-id
+  protocol_version_header: mcp-protocol-version
+  accept: application/json, text/event-stream
+  cors: 'Access-Control-Allow-Origin: *'
+  evidence: response headers on anonymous POST to https://app.usenotch.ai/mcp (2026-08-13)
+idempotency:
+  supported: false
+  note: >-
+    No idempotency key, no retry-safety contract, and no de-duplication semantics are
+    documented for MCP tool calls. Ad generation is a credit-spending side effect, so
+    a repeated call is a repeated spend as far as the published docs say. NOT wired as
+    type Idempotency in apis.yml — there is nothing to point at.
+pagination:
+  supported: unknown
+  note: tool schemas are auth-gated; no pagination contract is published
+versioning:
+  scheme: server-card version
+  current: 1.0.1
+  previous_observed: 1.0.0 (2026-07-21)
+  protocol_versioning: MCP protocol version negotiated per session via the mcp-protocol-version header
+  endpoint_stability: the connector URL https://app.usenotch.ai/mcp is unversioned
+error_envelope:
+  format: oauth2-style JSON
+  shape: '{"error": "<code>", "error_description": "<human message>"}'
+  content_type: application/json
+  problem_json: false
+  observed:
+  - status: 401
+    body: '{"error":"invalid_token","error_description":"Missing or invalid access token."}'
+  see: errors/sesame-labs-problem-types.yml
+rate_limit_signaling:
+  headers: none observed
+  model: monthly credits per workspace, shared with the web app
+  see: rate-limits/sesame-labs-rate-limits.yml
+request_tracing:
+  provider_header: none
+  note: 'CloudFront edge headers (x-amz-cf-id, via) are present but are infrastructure, not a provider
+    request id'
+human_in_the_loop:
+  documented: true
+  detail: >-
+    The provider's documented flow puts approval gates inside the conversation — the
+    agent returns hooks, script, avatar, first frames and scene clips for the human to
+    approve before generation continues. Finished ads land in the Notch workspace and
+    the download link returns to the chat.
+  source: https://app.usenotch.ai/mcp/setup
+data_handling:
+  training_claim: 'Notch never trains on your content (stated on https://app.usenotch.ai/mcp/setup)'
+  scope_claim: Notch receives what the assistant sends when it calls a Notch tool, not full chat history
+checked: '2026-08-13'

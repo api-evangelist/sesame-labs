@@ -1,0 +1,56 @@
+generated: '2026-08-13'
+method: searched
+source: https://app.usenotch.ai/pricing
+notes: >-
+  Notch publishes a pricing page at app.usenotch.ai/pricing (www.usenotch.ai/pricing
+  308-redirects to it). The page renders client-side: the served HTML carries no
+  tier names, prices, credit allowances or limits — only the page metadata, whose
+  own description names the four tiers recorded below ("Compare Free, Basic, Pro,
+  and Enterprise plans for AI video ad..."). Prices and credit quotas are therefore
+  NOT machine-readable from the provider's own surface and are recorded as null
+  rather than copied from third-party review sites. Notch bills in monthly credits;
+  the MCP setup FAQ states that connecting the MCP server costs nothing extra and
+  that ads created over MCP spend the same monthly credits as ads created on the web.
+currency: null
+billing_period: monthly
+plan_count: 4
+plans:
+- name: Free
+  price: null
+  currency: null
+  billing_period: monthly
+  included: null
+  note: named in the provider's own pricing-page metadata; amounts not readable from the served HTML
+- name: Basic
+  price: null
+  currency: null
+  billing_period: monthly
+  included: null
+  note: named in the provider's own pricing-page metadata; amounts not readable from the served HTML
+- name: Pro
+  price: null
+  currency: null
+  billing_period: monthly
+  included: null
+  note: named in the provider's own pricing-page metadata; amounts not readable from the served HTML
+- name: Enterprise
+  price: null
+  currency: null
+  billing_period: null
+  included: null
+  note: contact-sales tier; named in the provider's own pricing-page metadata
+metering:
+  unit: credit
+  scope: workspace/month
+  mcp_surcharge: none
+  evidence: https://app.usenotch.ai/mcp/setup
+x-evidence:
+- fetched: '2026-08-13'
+  url: https://app.usenotch.ai/pricing
+  http_status: 200
+  note: HTML shell only; plan data injected client-side (Next.js RSC payload carries no plan values)
+- fetched: '2026-08-13'
+  url: https://www.usenotch.ai/pricing
+  http_status: 308
+  note: redirects to app.usenotch.ai/pricing
+checked: '2026-08-13'

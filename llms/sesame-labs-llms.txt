@@ -1,15 +1,16 @@
 # Notch
 
-> Notch creates finished video and image ads from a plain-language brief. Connect it to your AI assistant over MCP and brief it like a teammate — avatars, voiceover, footage, captions, the full edit.
+> Notch turns a product page and plain-language brief into a finished video or image ad. Connect it over MCP to create, review, and edit ads from your AI chat.
 
 ## MCP connector
 
 - Endpoint: https://app.usenotch.ai/mcp (streamable HTTP)
 - Auth: OAuth 2.0 in the browser — no API keys
 - Claude (one click, prefilled): https://claude.ai/customize/connectors?modal=add-custom-connector&connectorName=Notch&connectorUrl=https%3A%2F%2Fapp.usenotch.ai%2Fmcp
-- Claude (manual): Settings → Connectors → Add custom connector → paste the URL
-- Claude Code / MCP-capable CLIs: `claude mcp add --transport http notch https://app.usenotch.ai/mcp`
-- ChatGPT: Settings → Connectors → Advanced → Developer mode → Create → paste the URL
+- Claude (manual): Customize → Connectors → Add custom connector → paste the URL
+- Claude Code (terminal): `claude mcp add --transport http notch https://app.usenotch.ai/mcp` — browser sign-in prompts on first tool use
+- Codex CLI (terminal): `codex mcp add notch --url https://app.usenotch.ai/mcp` then `codex mcp login notch`
+- ChatGPT (plugin, any plan, web): first open Settings → Plugins and turn on Developer mode — adding a plugin is unavailable until it is on. Then open https://chatgpt.com/plugins (or Plugins in the sidebar) and click the + button beside the plugin search. Name the plugin Notch, keep Connection on Server URL, and paste the connector URL. Set Authentication to OAuth, tick “I understand and want to continue”, and create the plugin. Notch then shows under Installed on the Plugins page, and its tools are available in your chats.
 - Server card: https://app.usenotch.ai/.well-known/mcp/server-card.json
 - OAuth resource metadata: https://app.usenotch.ai/.well-known/oauth-protected-resource/mcp
 

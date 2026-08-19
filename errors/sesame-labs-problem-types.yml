@@ -1,0 +1,36 @@
+generated: '2026-08-13'
+method: probed
+source: https://app.usenotch.ai/mcp
+format: oauth2-error-json
+rfc9457: false
+notes: >-
+  Notch publishes no error reference and has no OpenAPI to derive 4xx/5xx responses
+  from. The single documented-by-behaviour error below was observed live on an
+  anonymous MCP request; it is the OAuth 2.0 bearer-token error shape (RFC 6750),
+  not RFC 9457 problem+json. Tool-level errors (quota exhausted, generation failure,
+  invalid brief) are behind the OAuth wall and are NOT recorded here — no error
+  catalog is asserted beyond what was actually observed.
+envelope:
+  fields: [error, error_description]
+  content_type: application/json
+problems:
+- status: 401
+  code: invalid_token
+  title: Missing or invalid access token
+  detail: '{"error":"invalid_token","error_description":"Missing or invalid access token."}'
+  headers:
+    WWW-Authenticate: Bearer resource_metadata="https://app.usenotch.ai/.well-known/oauth-protected-resource/mcp"
+  remediation: >-
+    Complete the OAuth 2.0 authorization-code + PKCE flow against
+    https://app.usenotch.ai/api/v1/mcp-auth/authorize (registering dynamically at
+    /api/v1/mcp-auth/register if the client has no credentials) and retry with the
+    bearer token in the Authorization header.
+  observed_on:
+  - 'POST /mcp {"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+  - 'POST /mcp {"jsonrpc":"2.0","id":1,"method":"initialize"}'
+x-evidence:
+- fetched: '2026-08-13'
+  url: https://app.usenotch.ai/mcp
+  http_status: 401
+  content_type: application/json
+checked: '2026-08-13'

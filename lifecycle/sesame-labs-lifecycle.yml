@@ -1,0 +1,44 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://app.usenotch.ai/.well-known/mcp/server-card.json + https://app.usenotch.ai/mcp/setup +
+  https://www.usenotch.ai/newsroom
+versioning:
+  scheme: server-card semver
+  current: 1.0.1
+  observed_change: 1.0.0 (2026-07-21) -> 1.0.1 (2026-08-13)
+  endpoint: https://app.usenotch.ai/mcp is unversioned; the version is carried in the server card only
+  docs: https://app.usenotch.ai/mcp/setup
+deprecation:
+  policy_url: null
+  sunset_header: unknown
+  note: >-
+    No deprecation or sunset policy is published for the MCP connector. The marketing
+    site does carry one visible deprecation of a product surface —
+    /archive/agentic-ads-deprecated — but that is an archived marketing page, not a
+    developer deprecation policy, so no Deprecation pointer is wired.
+sla:
+  url: null
+  uptime_target: null
+status_page:
+  url: null
+  probed:
+  - url: https://status.usenotch.ai
+    result: DNS does not resolve
+  - url: https://usenotch.statuspage.io
+    status: 200
+    result: >-
+      Atlassian Statuspage marketing page, not a Notch status page — a soft-200 for an
+      unclaimed subdomain. Treated as a miss; no StatusPage pointer wired.
+changelog:
+  url: null
+  note: >-
+    No dated developer changelog. https://www.usenotch.ai/newsroom is a press room
+    (one release, 2026-08-07, "Notch Cuts Ad Creation Time by 90% With New URL to
+    Animated Ads Feature") and https://www.usenotch.ai/blog is marketing content.
+    Neither is a release/version log, so no ChangeLog pointer is wired.
+deprecated_operations: []
+support:
+  discord: https://discord.gg/7ekcRhWFYa
+  onboarding_call: https://www.usenotch.ai/request/book-a-call
+checked: '2026-08-13'

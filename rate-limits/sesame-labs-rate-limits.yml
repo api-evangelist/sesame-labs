@@ -1,0 +1,32 @@
+generated: '2026-08-13'
+method: searched
+source: https://app.usenotch.ai/mcp/setup
+limit_count: 0
+notes: >-
+  Notch publishes no request-rate limits for its MCP surface. The setup guide and
+  FAQs document a credit-based quota model instead of a rate limit: "Ads you create
+  over MCP spend the same monthly credits as ads created on usenotch.ai, so your
+  Notch plan is the only thing that matters." No per-minute/per-hour ceilings, no
+  burst allowance and no exhaustion status code are documented anywhere on the
+  setup guide, the pricing page or llms.txt. No rate-limit response headers were
+  observed on the anonymous MCP probe (the endpoint answers 401 before any limit
+  accounting), so the runtime signal an agent would need is not available.
+limits: []
+headers_observed: []
+documented_headers: []
+quota:
+  model: credits
+  scope: workspace/month
+  reset: monthly
+  shared_with: usenotch.ai web app (same credit pool)
+  overage_behavior: undocumented
+x-evidence:
+- fetched: '2026-08-13'
+  url: https://app.usenotch.ai/mcp/setup
+  http_status: 200
+  note: FAQ documents credits, not rate limits
+- fetched: '2026-08-13'
+  url: https://app.usenotch.ai/mcp
+  http_status: 401
+  note: 'anonymous POST tools/list; response carried no X-RateLimit-*, RateLimit-* or Retry-After header'
+checked: '2026-08-13'

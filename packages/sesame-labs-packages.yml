@@ -1,0 +1,31 @@
+generated: '2026-08-13'
+method: searched
+source: registry searches + https://app.usenotch.ai/mcp/setup + https://app.usenotch.ai/llms.txt
+package_count: 0
+packages: []
+notes: >-
+  Notch ships no client libraries. Access is exclusively through the hosted, remote
+  MCP connector at https://app.usenotch.ai/mcp — there is no API key, no REST API,
+  and therefore nothing for an SDK to wrap. The setup guide and llms.txt document
+  only connector URLs and client-side install commands (`claude mcp add`,
+  `codex mcp add`), which install nothing of Notch's own: they register the remote
+  URL in the MCP client. No stdio/npx package is published either. Recorded as an
+  honest zero; no SDKs pointer is wired in apis.yml because there is no SDK.
+registries_searched:
+- registry: npm
+  query: usenotch
+  result: 0 results
+- registry: npm
+  query: notch ads
+  result: no first-party Notch/Sesame Labs package
+- registry: pypi
+  name: notch
+  result: unrelated third-party logging package (author William Jackson)
+- registry: github
+  org: Sesame-Labs
+  result: org exists (github.com/Sesame-Labs) but has 0 public repositories and no profile metadata
+    linking it to usenotch.ai
+- registry: github
+  org: notch-ai
+  result: unrelated — single repo "autosteer", a Claude Code desktop app, not this company
+checked: '2026-08-13'

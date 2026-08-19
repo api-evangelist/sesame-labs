@@ -1,4 +1,4 @@
-generated: '2026-07-21'
+generated: '2026-08-13'
 method: searched
 status: published
 source: https://app.usenotch.ai/.well-known/mcp/server-card.json
@@ -6,35 +6,55 @@ docs: https://app.usenotch.ai/mcp/setup
 server:
   name: notch
   title: Notch
-  version: 1.0.0
+  version: 1.0.1
   transport: streamable-http
   url: https://app.usenotch.ai/mcp
-  description: >-
-    Notch creates finished video and image ads from a plain-language brief.
-    Connect it to an AI assistant over MCP and brief it like a teammate —
-    avatars, voiceover, footage, captions, the full edit. Ads created over MCP
-    land in the user's Notch workspace and spend the same monthly credits as ads
-    created on the web.
+  description: Notch turns a product page and plain-language brief into a finished video or image ad.
+    Connect it over MCP to create, review, and edit ads from your AI chat. Ads created over MCP land in
+    the user's Notch workspace and spend the same monthly credits as ads created on the web.
 authentication:
   type: oauth2
-  description: >-
-    Browser-based OAuth 2.0 sign-in; no API keys to create or paste. Public
-    client with PKCE (S256) and RFC 7591 dynamic client registration.
+  description: Browser-based OAuth 2.0 sign-in; no API keys to create or paste. Public client with PKCE
+    (S256) and RFC 7591 dynamic client registration.
   resource_metadata: https://app.usenotch.ai/.well-known/oauth-protected-resource/mcp
   authorization_server: https://app.usenotch.ai/.well-known/oauth-authorization-server
+  challenge: 'WWW-Authenticate: Bearer resource_metadata="https://app.usenotch.ai/.well-known/oauth-protected-resource/mcp"'
 install:
-  claude_cli: claude mcp add --transport http notch https://app.usenotch.ai/mcp
   claude_connector: https://claude.ai/customize/connectors?modal=add-custom-connector&connectorName=Notch&connectorUrl=https%3A%2F%2Fapp.usenotch.ai%2Fmcp
-  chatgpt: Settings -> Connectors -> Advanced -> Developer mode -> Create -> paste the URL
-# The server card and docs describe capabilities but do not enumerate tool names,
-# and the tools/list requires an authenticated OAuth session, so exact tool
-# names/operationIds are not captured here (no fabrication).
+  claude_manual: Customize -> Connectors -> Add custom connector -> paste https://app.usenotch.ai/mcp
+  claude_cli: claude mcp add --transport http notch https://app.usenotch.ai/mcp
+  codex_cli: codex mcp add notch --url https://app.usenotch.ai/mcp   # then `codex mcp login notch`
+  chatgpt: Settings -> Plugins -> Developer mode on, then Plugins page -> + -> Server URL https://app.usenotch.ai/mcp
+    with Authentication set to OAuth
 capabilities:
-- Generate a finished video ad from a plain-language brief (script, avatar, voiceover, footage, captions, edit)
-- Generate static image ads
-- Select and customize AI avatars
-- Review and approve storyboards
-- Produce UGC-style videos and product demos
-tools_note: >-
-  Exact MCP tool names are not published on the server card and require an
-  authenticated tools/list; only the documented capabilities above are recorded.
+- Turn a product page URL plus a plain-language brief into a finished video ad (script, avatar, voiceover,
+  footage, captions, edit)
+- Generate static and animated image ads (e.g. three 4:5 concepts from one benefit)
+- Produce UGC-style videos, product demos and cinematic shorts
+- Return hooks, script, avatar, first frames and scene clips into the chat for approval before rendering
+- Create variants of an existing best-performing ad
+- Save every finished ad to the user's Notch workspace and return the download link in chat
+tools:
+- status: unknown
+  note: Exact MCP tool names and inputSchemas are NOT published. The server card carries no tool list and
+    llms.txt names none. `tools/list` and `initialize` both return HTTP 401 {"error":"invalid_token"} with
+    a Bearer challenge, so the live tool schema requires an authenticated OAuth session to introspect.
+    Only the documented capabilities above are recorded; no tool names are asserted here.
+deployment:
+  mode: remote
+  endpoint: https://app.usenotch.ai/mcp
+  install: null
+  package: null
+  auth: oauth
+  verified: probed
+x-evidence:
+- fetched: '2026-08-13'
+  url: https://app.usenotch.ai/.well-known/mcp/server-card.json
+  http_status: 200
+  content_type: application/json
+- fetched: '2026-08-13'
+  url: https://app.usenotch.ai/mcp
+  method: 'POST {"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+  http_status: 401
+  body: '{"error":"invalid_token","error_description":"Missing or invalid access token."}'
+  note: auth-gated; tool schemas not anonymously introspectable

@@ -1,4 +1,4 @@
-generated: '2026-07-21'
+generated: '2026-08-13'
 method: searched
 source: https://app.usenotch.ai/.well-known/oauth-authorization-server
 docs: https://app.usenotch.ai/mcp/setup
@@ -33,3 +33,23 @@ protected_resource:
   authorization_servers: [https://app.usenotch.ai]
   bearer_methods_supported: [header]
   scopes_supported: []
+scopes:
+  published: false
+  note: >-
+    Both the authorization-server metadata and the protected-resource metadata
+    declare an EMPTY scope set (no scopes_supported, no per-flow scopes). Access is
+    all-or-nothing on the workspace once the user signs in — there is no scope
+    surface to catalogue, so no scopes/ artifact and no OAuthScopes pointer are
+    emitted.
+x-evidence:
+- fetched: '2026-08-13'
+  url: https://app.usenotch.ai/.well-known/oauth-authorization-server
+  http_status: 200
+- fetched: '2026-08-13'
+  url: https://app.usenotch.ai/.well-known/oauth-protected-resource/mcp
+  http_status: 200
+- fetched: '2026-08-13'
+  url: https://app.usenotch.ai/mcp
+  http_status: 401
+  note: 'anonymous POST returns WWW-Authenticate: Bearer resource_metadata="https://app.usenotch.ai/.well-known/oauth-protected-resource/mcp"'
+checked: '2026-08-13'

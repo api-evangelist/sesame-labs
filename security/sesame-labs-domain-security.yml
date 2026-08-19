@@ -1,13 +1,18 @@
-generated: '2026-07-21'
+generated: '2026-08-13'
 method: probed
 source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
 hosts:
-- host: usenotch.ai
+- host: www.usenotch.ai
   https: true
   tls_version: TLSv1.3
-  cert_expires: Sep  2 06:00:36 2026 GMT
+  cert_expires: Nov  1 02:32:44 2026 GMT
   hsts: true
   hsts_max_age: 31536000
+- host: app.usenotch.ai
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Jan 15 23:59:59 2027 GMT
+  hsts: false
 domains:
 - domain: usenotch.ai
   dnssec: false
