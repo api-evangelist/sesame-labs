@@ -23,7 +23,7 @@ install:
   claude_connector: https://claude.ai/customize/connectors?modal=add-custom-connector&connectorName=Notch&connectorUrl=https%3A%2F%2Fapp.usenotch.ai%2Fmcp
   claude_manual: Customize -> Connectors -> Add custom connector -> paste https://app.usenotch.ai/mcp
   claude_cli: claude mcp add --transport http notch https://app.usenotch.ai/mcp
-  codex_cli: codex mcp add notch --url https://app.usenotch.ai/mcp   # then `codex mcp login notch`
+  codex_cli: codex mcp add notch --url https://app.usenotch.ai/mcp
   chatgpt: Settings -> Plugins -> Developer mode on, then Plugins page -> + -> Server URL https://app.usenotch.ai/mcp
     with Authentication set to OAuth
 capabilities:
@@ -36,17 +36,17 @@ capabilities:
 - Save every finished ad to the user's Notch workspace and return the download link in chat
 tools:
 - status: unknown
-  note: Exact MCP tool names and inputSchemas are NOT published. The server card carries no tool list and
-    llms.txt names none. `tools/list` and `initialize` both return HTTP 401 {"error":"invalid_token"} with
-    a Bearer challenge, so the live tool schema requires an authenticated OAuth session to introspect.
+  note: Exact MCP tool names and inputSchemas are NOT published. The server card carries no tool list
+    and llms.txt names none. `tools/list` and `initialize` both return HTTP 401 {"error":"invalid_token"}
+    with a Bearer challenge, so the live tool schema requires an authenticated OAuth session to introspect.
     Only the documented capabilities above are recorded; no tool names are asserted here.
 deployment:
   mode: remote
   endpoint: https://app.usenotch.ai/mcp
-  install: null
-  package: null
-  auth: oauth
   verified: probed
+  probe: gated
+  checked: '2026-08-12'
+  source: catalog MCP census
 x-evidence:
 - fetched: '2026-08-13'
   url: https://app.usenotch.ai/.well-known/mcp/server-card.json
@@ -54,7 +54,7 @@ x-evidence:
   content_type: application/json
 - fetched: '2026-08-13'
   url: https://app.usenotch.ai/mcp
-  method: 'POST {"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+  method: POST {"jsonrpc":"2.0","id":1,"method":"tools/list"}
   http_status: 401
   body: '{"error":"invalid_token","error_description":"Missing or invalid access token."}'
   note: auth-gated; tool schemas not anonymously introspectable
