@@ -54,3 +54,33 @@ x-evidence:
   http_status: 308
   note: redirects to app.usenotch.ai/pricing
 checked: '2026-08-13'
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models: []
+  units: []
+  plans:
+  - name: Free
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Basic
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Pro
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Enterprise
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
