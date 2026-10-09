@@ -58,3 +58,17 @@ x-evidence:
   http_status: 401
   body: '{"error":"invalid_token","error_description":"Missing or invalid access token."}'
   note: auth-gated; tool schemas not anonymously introspectable
+rfc9728:
+  endpoint: https://app.usenotch.ai/mcp
+  metadata_url: https://app.usenotch.ai/.well-known/oauth-protected-resource/mcp
+  discovered_via: WWW-Authenticate resource_metadata on an anonymous POST initialize
+  fetched: '2026-09-25'
+  http_status: 200
+  content_type: application/json
+  document:
+    resource: https://app.usenotch.ai/mcp
+    authorization_servers:
+    - https://app.usenotch.ai
+    scopes_supported: []
+    bearer_methods_supported:
+    - header
